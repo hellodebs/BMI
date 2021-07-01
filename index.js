@@ -4,16 +4,15 @@ let button = document.querySelector("button.submit");
 let result = document.querySelector(".result");
 let formElement = document.querySelector("form");
 
-const height = inputHeight.value;
-const weight = inputWeight.value;
-
-button.addEventListener("click", () => {
+formElement.addEventListener("submit", (event) => {
+  event.preventDefault();
+  let height = inputHeight.value;
+  let weight = inputWeight.value;
   let heightInMeter = height / 100;
   let bmiResult = weight / (heightInMeter * heightInMeter);
   result.textContent = bmiResult.toFixed(2);
-
   switch (true) {
-    case bmiResult < 18.5:
+    case bmiResult <= 18.5:
       result.classList.add("too-much");
       break;
     case bmiResult > 18.5 && bmiResult < 25:
@@ -24,4 +23,5 @@ button.addEventListener("click", () => {
     case bmiResult >= 30:
       result.classList.add("too-much");
   }
+  formElement.reset();
 });
